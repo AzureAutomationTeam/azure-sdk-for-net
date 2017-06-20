@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Azure.Management.Automation;
 using Microsoft.Azure.Management.Resources;
 using Microsoft.Azure.Test;
 
@@ -12,9 +13,9 @@ namespace Microsoft.Azure.Management.Automation.Testing
     public static class ResourceGroupHelper
     {
 
-        public static AutomationManagementClient GetAutomationClient(RecordedDelegatingHandler handler)
+        public static IAutomationClient GetAutomationClient(RecordedDelegatingHandler handler)
         {
-            return TestBase.GetServiceClient<AutomationManagementClient>(new CSMTestEnvironmentFactory());
+            return TestBase.GetServiceClient<AutomationClient>(new CSMTestEnvironmentFactory());
         }
 
         public static ResourceManagementClient GetResourcesClient(RecordedDelegatingHandler handler)
@@ -30,7 +31,7 @@ namespace Microsoft.Azure.Management.Automation.Testing
         /// <returns>A location where this resource type is supported for the current subscription</returns>
         public static string GetResourceLocation(ResourceManagementClient client, string resourceType)
         {
-            var supportedLocations = new HashSet<string>(new[] { "East Asia", "West US", "North Central US", "North Europe", "West Europe", "South Central US", "East US" }, StringComparer.OrdinalIgnoreCase);
+            var supportedLocations = new HashSet<string>(new[] { "East Asia", "West US", "North Central US", "North Europe", "West Europe", "South Central US", "East US 2" }, StringComparer.OrdinalIgnoreCase);
 
             string location = null;
             string[] parts = resourceType.Split('/');
