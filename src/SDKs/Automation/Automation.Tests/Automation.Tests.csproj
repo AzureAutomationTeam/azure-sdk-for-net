@@ -13,6 +13,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Customizations\**" />
+    <EmbeddedResource Remove="Customizations\**" />
+    <None Remove="Customizations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Network" Version="[14.0.0-preview,16.0)" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
     <ProjectReference Include="..\Management.Automation\Microsoft.Azure.Management.Automation.csproj" />
