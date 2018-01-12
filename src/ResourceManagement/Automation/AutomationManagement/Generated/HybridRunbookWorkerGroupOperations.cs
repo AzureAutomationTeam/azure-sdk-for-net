@@ -492,13 +492,17 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
+        /// <param name='parameters'>
+        /// Optional. The parameters supplied to the list job stream's stream
+        /// items operation.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
         /// <returns>
         /// The response model for the list hybrid runbook worker groups.
         /// </returns>
-        public async Task<HybridRunbookWorkerGroupsListResponse> ListAsync(string resourceGroupName, string automationAccount, CancellationToken cancellationToken)
+        public async Task<HybridRunbookWorkerGroupsListResponse> ListAsync(string resourceGroupName, string automationAccount, HybridRunbookWorkerGroupListParameters parameters, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -519,6 +523,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
+                tracingParameters.Add("parameters", parameters);
                 TracingAdapter.Enter(invocationId, this, "ListAsync", tracingParameters);
             }
             
@@ -540,6 +545,15 @@ namespace Microsoft.Azure.Management.Automation
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/hybridRunbookWorkerGroups";
             List<string> queryParameters = new List<string>();
+            List<string> odataFilter = new List<string>();
+            if (parameters != null && parameters.GroupType != null)
+            {
+                odataFilter.Add("groupType eq '" + Uri.EscapeDataString(parameters.GroupType) + "'");
+            }
+            if (odataFilter.Count > 0)
+            {
+                queryParameters.Add("$filter=" + string.Join(null, odataFilter));
+            }
             queryParameters.Add("api-version=2017-05-15-preview");
             if (queryParameters.Count > 0)
             {

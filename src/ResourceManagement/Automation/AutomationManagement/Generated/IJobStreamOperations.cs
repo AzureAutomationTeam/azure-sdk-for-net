@@ -45,8 +45,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='jobStreamId'>
         /// The job stream id.
@@ -57,7 +57,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job stream operation.
         /// </returns>
-        Task<JobStreamGetResponse> GetAsync(string resourceGroupName, string automationAccount, Guid jobId, string jobStreamId, CancellationToken cancellationToken);
+        Task<JobStreamGetResponse> GetAsync(string resourceGroupName, string automationAccount, string jobName, string jobStreamId, CancellationToken cancellationToken);
         
         /// <summary>
         /// Retrieve a test job streams identified by runbook name and stream
@@ -85,7 +85,7 @@ namespace Microsoft.Azure.Management.Automation
         Task<JobStreamGetResponse> GetTestJobStreamAsync(string resourceGroupName, string automationAccount, string runbookName, string jobStreamId, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Retrieve a list of jobs streams identified by job id.  (see
+        /// Retrieve a list of jobs streams identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/jobstreamoperations for more
         /// information)
         /// </summary>
@@ -95,8 +95,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job Id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='parameters'>
         /// The parameters supplied to the list job stream's stream items
@@ -108,7 +108,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the list job stream operation.
         /// </returns>
-        Task<JobStreamListResponse> ListAsync(string resourceGroupName, string automationAccount, Guid jobId, JobStreamListParameters parameters, CancellationToken cancellationToken);
+        Task<JobStreamListResponse> ListAsync(string resourceGroupName, string automationAccount, string jobName, JobStreamListParameters parameters, CancellationToken cancellationToken);
         
         /// <summary>
         /// Gets the next page of job streams using next link.

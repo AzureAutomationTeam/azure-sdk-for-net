@@ -162,14 +162,18 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
+        /// <param name='parameters'>
+        /// Optional. The parameters supplied to the list job stream's stream
+        /// items operation.
+        /// </param>
         /// <returns>
         /// The response model for the list hybrid runbook worker groups.
         /// </returns>
-        public static HybridRunbookWorkerGroupsListResponse List(this IHybridRunbookWorkerGroupOperations operations, string resourceGroupName, string automationAccount)
+        public static HybridRunbookWorkerGroupsListResponse List(this IHybridRunbookWorkerGroupOperations operations, string resourceGroupName, string automationAccount, HybridRunbookWorkerGroupListParameters parameters)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IHybridRunbookWorkerGroupOperations)s).ListAsync(resourceGroupName, automationAccount);
+                return ((IHybridRunbookWorkerGroupOperations)s).ListAsync(resourceGroupName, automationAccount, parameters);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -189,12 +193,16 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
+        /// <param name='parameters'>
+        /// Optional. The parameters supplied to the list job stream's stream
+        /// items operation.
+        /// </param>
         /// <returns>
         /// The response model for the list hybrid runbook worker groups.
         /// </returns>
-        public static Task<HybridRunbookWorkerGroupsListResponse> ListAsync(this IHybridRunbookWorkerGroupOperations operations, string resourceGroupName, string automationAccount)
+        public static Task<HybridRunbookWorkerGroupsListResponse> ListAsync(this IHybridRunbookWorkerGroupOperations operations, string resourceGroupName, string automationAccount, HybridRunbookWorkerGroupListParameters parameters)
         {
-            return operations.ListAsync(resourceGroupName, automationAccount, CancellationToken.None);
+            return operations.ListAsync(resourceGroupName, automationAccount, parameters, CancellationToken.None);
         }
         
         /// <summary>

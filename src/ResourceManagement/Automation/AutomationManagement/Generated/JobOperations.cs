@@ -466,7 +466,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Retrieve the job identified by job id.  (see
+        /// Retrieve the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -476,8 +476,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -485,7 +485,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job operation.
         /// </returns>
-        public async Task<JobGetResponse> GetAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<JobGetResponse> GetAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -495,6 +495,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -506,7 +510,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
             
@@ -527,7 +531,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/Jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");
             if (queryParameters.Count > 0)
@@ -784,7 +788,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Retrieve the job output identified by job id.  (see
+        /// Retrieve the job output identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -794,8 +798,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -803,7 +807,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job output operation.
         /// </returns>
-        public async Task<JobGetOutputResponse> GetOutputAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<JobGetOutputResponse> GetOutputAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -813,6 +817,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -824,7 +832,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "GetOutputAsync", tracingParameters);
             }
             
@@ -845,7 +853,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/Jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/output";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");
@@ -949,8 +957,8 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Retrieve the runbook content of the job identified by job id.  (see
-        /// http://aka.ms/azureautomationsdk/joboperations for more
+        /// Retrieve the runbook content of the job identified by job name.
+        /// (see http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
         /// <param name='resourceGroupName'>
@@ -959,8 +967,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -968,7 +976,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get runbook content of the job operation.
         /// </returns>
-        public async Task<JobGetRunbookContentResponse> GetRunbookContentAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<JobGetRunbookContentResponse> GetRunbookContentAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -978,6 +986,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -989,7 +1001,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "GetRunbookContentAsync", tracingParameters);
             }
             
@@ -1010,7 +1022,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/Jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/runbookContent";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");
@@ -1774,7 +1786,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Resume the job identified by jobId.  (see
+        /// Resume the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -1784,8 +1796,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1794,7 +1806,7 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        public async Task<AzureOperationResponse> ResumeAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<AzureOperationResponse> ResumeAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -1804,6 +1816,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -1815,7 +1831,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "ResumeAsync", tracingParameters);
             }
             
@@ -1836,7 +1852,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/resume";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");
@@ -1933,7 +1949,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Stop the job identified by jobId.  (see
+        /// Stop the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -1943,8 +1959,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -1953,7 +1969,7 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        public async Task<AzureOperationResponse> StopAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<AzureOperationResponse> StopAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -1963,6 +1979,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -1974,7 +1994,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "StopAsync", tracingParameters);
             }
             
@@ -1995,7 +2015,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/stop";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");
@@ -2092,7 +2112,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Suspend the job identified by jobId.  (see
+        /// Suspend the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -2102,8 +2122,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -2112,7 +2132,7 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        public async Task<AzureOperationResponse> SuspendAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken)
+        public async Task<AzureOperationResponse> SuspendAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -2122,6 +2142,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -2133,7 +2157,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 TracingAdapter.Enter(invocationId, this, "SuspendAsync", tracingParameters);
             }
             
@@ -2154,7 +2178,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/suspend";
             List<string> queryParameters = new List<string>();
             queryParameters.Add("api-version=2017-05-15-preview");

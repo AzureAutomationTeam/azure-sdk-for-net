@@ -92,13 +92,17 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
+        /// <param name='parameters'>
+        /// The parameters supplied to the list job stream's stream items
+        /// operation.
+        /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
         /// <returns>
         /// The response model for the list hybrid runbook worker groups.
         /// </returns>
-        Task<HybridRunbookWorkerGroupsListResponse> ListAsync(string resourceGroupName, string automationAccount, CancellationToken cancellationToken);
+        Task<HybridRunbookWorkerGroupsListResponse> ListAsync(string resourceGroupName, string automationAccount, HybridRunbookWorkerGroupListParameters parameters, CancellationToken cancellationToken);
         
         /// <summary>
         /// Retrieve next list of hybrid runbook worker groups.  (see
