@@ -74,8 +74,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='jobStreamId'>
         /// Required. The job stream id.
@@ -86,7 +86,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job stream operation.
         /// </returns>
-        public async Task<JobStreamGetResponse> GetAsync(string resourceGroupName, string automationAccount, Guid jobId, string jobStreamId, CancellationToken cancellationToken)
+        public async Task<JobStreamGetResponse> GetAsync(string resourceGroupName, string automationAccount, string jobName, string jobStreamId, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -96,6 +96,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             if (jobStreamId == null)
             {
@@ -111,7 +115,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 tracingParameters.Add("jobStreamId", jobStreamId);
                 TracingAdapter.Enter(invocationId, this, "GetAsync", tracingParameters);
             }
@@ -133,7 +137,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/Jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/streams/";
             url = url + Uri.EscapeDataString(jobStreamId);
             List<string> queryParameters = new List<string>();
@@ -557,7 +561,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Retrieve a list of jobs streams identified by job id.  (see
+        /// Retrieve a list of jobs streams identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/jobstreamoperations for more
         /// information)
         /// </summary>
@@ -567,8 +571,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job Id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='parameters'>
         /// Optional. The parameters supplied to the list job stream's stream
@@ -580,7 +584,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the list job stream operation.
         /// </returns>
-        public async Task<JobStreamListResponse> ListAsync(string resourceGroupName, string automationAccount, Guid jobId, JobStreamListParameters parameters, CancellationToken cancellationToken)
+        public async Task<JobStreamListResponse> ListAsync(string resourceGroupName, string automationAccount, string jobName, JobStreamListParameters parameters, CancellationToken cancellationToken)
         {
             // Validate
             if (resourceGroupName == null)
@@ -590,6 +594,10 @@ namespace Microsoft.Azure.Management.Automation
             if (automationAccount == null)
             {
                 throw new ArgumentNullException("automationAccount");
+            }
+            if (jobName == null)
+            {
+                throw new ArgumentNullException("jobName");
             }
             
             // Tracing
@@ -601,7 +609,7 @@ namespace Microsoft.Azure.Management.Automation
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("resourceGroupName", resourceGroupName);
                 tracingParameters.Add("automationAccount", automationAccount);
-                tracingParameters.Add("jobId", jobId);
+                tracingParameters.Add("jobName", jobName);
                 tracingParameters.Add("parameters", parameters);
                 TracingAdapter.Enter(invocationId, this, "ListAsync", tracingParameters);
             }
@@ -623,7 +631,7 @@ namespace Microsoft.Azure.Management.Automation
             url = url + "/automationAccounts/";
             url = url + Uri.EscapeDataString(automationAccount);
             url = url + "/jobs/";
-            url = url + Uri.EscapeDataString(jobId.ToString());
+            url = url + Uri.EscapeDataString(jobName);
             url = url + "/streams";
             List<string> queryParameters = new List<string>();
             List<string> odataFilter = new List<string>();

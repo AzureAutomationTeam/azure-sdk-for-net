@@ -33,7 +33,6 @@ using Hyak.Common;
 using Microsoft.Azure;
 using Microsoft.Azure.Management.Automation;
 using Microsoft.Azure.Management.Automation.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Azure.Management.Automation
@@ -408,33 +407,28 @@ namespace Microsoft.Azure.Management.Automation
                                     nodeConfigurationInstance.Name = nameInstance;
                                 }
                             }
-
-                            IEnumerable<JToken> extensionHandlerList = responseDoc["extensionHandler"].Children();
-                            if (extensionHandlerList != null)
+                            
+                            JToken extensionHandlerArray = responseDoc["extensionHandler"];
+                            if (extensionHandlerArray != null && extensionHandlerArray.Type != JTokenType.Null)
                             {
-                                IList<DscNodeExtensionHandlerAssociationProperty> extensionHandlerListInstance =
-                                    new List<DscNodeExtensionHandlerAssociationProperty>();
-                                nodeInstance.ExtensionHandler = extensionHandlerListInstance;
-
-                                foreach (JToken extensionHandler in extensionHandlerList)
+                                foreach (JToken extensionHandlerValue in ((JArray)extensionHandlerArray))
                                 {
-                                    DscNodeExtensionHandlerAssociationProperty extensionHandlerInstance = new DscNodeExtensionHandlerAssociationProperty();
-
-                                    JToken nameValue = extensionHandler["name"];
-                                    if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                    DscNodeExtensionHandlerAssociationProperty dscNodeExtensionHandlerAssociationPropertyInstance = new DscNodeExtensionHandlerAssociationProperty();
+                                    nodeInstance.ExtensionHandler.Add(dscNodeExtensionHandlerAssociationPropertyInstance);
+                                    
+                                    JToken nameValue2 = extensionHandlerValue["name"];
+                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                     {
-                                        string nameInstance = ((string)nameValue);
-                                        extensionHandlerInstance.Name = nameInstance;
+                                        string nameInstance2 = ((string)nameValue2);
+                                        dscNodeExtensionHandlerAssociationPropertyInstance.Name = nameInstance2;
                                     }
-
-                                    JToken versionValue = extensionHandler["version"];
+                                    
+                                    JToken versionValue = extensionHandlerValue["version"];
                                     if (versionValue != null && versionValue.Type != JTokenType.Null)
                                     {
                                         string versionInstance = ((string)versionValue);
-                                        extensionHandlerInstance.Version = versionInstance;
+                                        dscNodeExtensionHandlerAssociationPropertyInstance.Version = versionInstance;
                                     }
-
-                                    extensionHandlerListInstance.Add(extensionHandlerInstance);
                                 }
                             }
                             
@@ -459,11 +453,11 @@ namespace Microsoft.Azure.Management.Automation
                                 nodeInstance.Id = idInstance;
                             }
                             
-                            JToken nameValue2 = responseDoc["name"];
-                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                            JToken nameValue3 = responseDoc["name"];
+                            if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                             {
-                                string nameInstance2 = ((string)nameValue2);
-                                nodeInstance.Name = nameInstance2;
+                                string nameInstance3 = ((string)nameValue3);
+                                nodeInstance.Name = nameInstance3;
                             }
                             
                             JToken locationValue = responseDoc["location"];
@@ -735,36 +729,31 @@ namespace Microsoft.Azure.Management.Automation
                                             nodeConfigurationInstance.Name = nameInstance;
                                         }
                                     }
-
-                                    IEnumerable<JToken> extensionHandlerList = valueValue["extensionHandler"].Children();
-                                    if (extensionHandlerList != null)
+                                    
+                                    JToken extensionHandlerArray = valueValue["extensionHandler"];
+                                    if (extensionHandlerArray != null && extensionHandlerArray.Type != JTokenType.Null)
                                     {
-                                        IList<DscNodeExtensionHandlerAssociationProperty> extensionHandlerListInstance =
-                                            new List<DscNodeExtensionHandlerAssociationProperty>();
-                                        dscNodeInstance.ExtensionHandler = extensionHandlerListInstance;
-
-                                        foreach (JToken extensionHandler in extensionHandlerList)
+                                        foreach (JToken extensionHandlerValue in ((JArray)extensionHandlerArray))
                                         {
-                                            DscNodeExtensionHandlerAssociationProperty extensionHandlerInstance = new DscNodeExtensionHandlerAssociationProperty();
-
-                                            JToken nameValue = extensionHandler["name"];
-                                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                            DscNodeExtensionHandlerAssociationProperty dscNodeExtensionHandlerAssociationPropertyInstance = new DscNodeExtensionHandlerAssociationProperty();
+                                            dscNodeInstance.ExtensionHandler.Add(dscNodeExtensionHandlerAssociationPropertyInstance);
+                                            
+                                            JToken nameValue2 = extensionHandlerValue["name"];
+                                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                             {
-                                                string nameInstance = ((string)nameValue);
-                                                extensionHandlerInstance.Name = nameInstance;
+                                                string nameInstance2 = ((string)nameValue2);
+                                                dscNodeExtensionHandlerAssociationPropertyInstance.Name = nameInstance2;
                                             }
-
-                                            JToken versionValue = extensionHandler["version"];
+                                            
+                                            JToken versionValue = extensionHandlerValue["version"];
                                             if (versionValue != null && versionValue.Type != JTokenType.Null)
                                             {
                                                 string versionInstance = ((string)versionValue);
-                                                extensionHandlerInstance.Version = versionInstance;
+                                                dscNodeExtensionHandlerAssociationPropertyInstance.Version = versionInstance;
                                             }
-
-                                            extensionHandlerListInstance.Add(extensionHandlerInstance);
                                         }
                                     }
-                            
+                                    
                                     JToken statusValue = valueValue["status"];
                                     if (statusValue != null && statusValue.Type != JTokenType.Null)
                                     {
@@ -786,11 +775,11 @@ namespace Microsoft.Azure.Management.Automation
                                         dscNodeInstance.Id = idInstance;
                                     }
                                     
-                                    JToken nameValue2 = valueValue["name"];
-                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                                    JToken nameValue3 = valueValue["name"];
+                                    if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                                     {
-                                        string nameInstance2 = ((string)nameValue2);
-                                        dscNodeInstance.Name = nameInstance2;
+                                        string nameInstance3 = ((string)nameValue3);
+                                        dscNodeInstance.Name = nameInstance3;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
@@ -1018,33 +1007,28 @@ namespace Microsoft.Azure.Management.Automation
                                             nodeConfigurationInstance.Name = nameInstance;
                                         }
                                     }
-
-                                    IEnumerable<JToken> extensionHandlerList = valueValue["extensionHandler"].Children();
-                                    if (extensionHandlerList != null)
+                                    
+                                    JToken extensionHandlerArray = valueValue["extensionHandler"];
+                                    if (extensionHandlerArray != null && extensionHandlerArray.Type != JTokenType.Null)
                                     {
-                                        IList<DscNodeExtensionHandlerAssociationProperty> extensionHandlerListInstance =
-                                            new List<DscNodeExtensionHandlerAssociationProperty>();
-                                        dscNodeInstance.ExtensionHandler = extensionHandlerListInstance;
-
-                                        foreach (JToken extensionHandler in extensionHandlerList)
+                                        foreach (JToken extensionHandlerValue in ((JArray)extensionHandlerArray))
                                         {
-                                            DscNodeExtensionHandlerAssociationProperty extensionHandlerInstance = new DscNodeExtensionHandlerAssociationProperty();
-
-                                            JToken nameValue = extensionHandler["name"];
-                                            if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                            DscNodeExtensionHandlerAssociationProperty dscNodeExtensionHandlerAssociationPropertyInstance = new DscNodeExtensionHandlerAssociationProperty();
+                                            dscNodeInstance.ExtensionHandler.Add(dscNodeExtensionHandlerAssociationPropertyInstance);
+                                            
+                                            JToken nameValue2 = extensionHandlerValue["name"];
+                                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                             {
-                                                string nameInstance = ((string)nameValue);
-                                                extensionHandlerInstance.Name = nameInstance;
+                                                string nameInstance2 = ((string)nameValue2);
+                                                dscNodeExtensionHandlerAssociationPropertyInstance.Name = nameInstance2;
                                             }
-
-                                            JToken versionValue = extensionHandler["version"];
+                                            
+                                            JToken versionValue = extensionHandlerValue["version"];
                                             if (versionValue != null && versionValue.Type != JTokenType.Null)
                                             {
                                                 string versionInstance = ((string)versionValue);
-                                                extensionHandlerInstance.Version = versionInstance;
+                                                dscNodeExtensionHandlerAssociationPropertyInstance.Version = versionInstance;
                                             }
-
-                                            extensionHandlerListInstance.Add(extensionHandlerInstance);
                                         }
                                     }
                                     
@@ -1069,11 +1053,11 @@ namespace Microsoft.Azure.Management.Automation
                                         dscNodeInstance.Id = idInstance;
                                     }
                                     
-                                    JToken nameValue2 = valueValue["name"];
-                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                                    JToken nameValue3 = valueValue["name"];
+                                    if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                                     {
-                                        string nameInstance2 = ((string)nameValue2);
-                                        dscNodeInstance.Name = nameInstance2;
+                                        string nameInstance3 = ((string)nameValue3);
+                                        dscNodeInstance.Name = nameInstance3;
                                     }
                                     
                                     JToken locationValue = valueValue["location"];
@@ -1369,33 +1353,28 @@ namespace Microsoft.Azure.Management.Automation
                                     nodeConfigurationInstance.Name = nameInstance;
                                 }
                             }
-
-                            IEnumerable<JToken> extensionHandlerList = responseDoc["extensionHandler"].Children();
-                            if (extensionHandlerList != null)
+                            
+                            JToken extensionHandlerArray = responseDoc["extensionHandler"];
+                            if (extensionHandlerArray != null && extensionHandlerArray.Type != JTokenType.Null)
                             {
-                                IList<DscNodeExtensionHandlerAssociationProperty> extensionHandlerListInstance =
-                                    new List<DscNodeExtensionHandlerAssociationProperty>();
-                                nodeInstance.ExtensionHandler = extensionHandlerListInstance;
-
-                                foreach (JToken extensionHandler in extensionHandlerList)
+                                foreach (JToken extensionHandlerValue in ((JArray)extensionHandlerArray))
                                 {
-                                    DscNodeExtensionHandlerAssociationProperty extensionHandlerInstance = new DscNodeExtensionHandlerAssociationProperty();
-
-                                    JToken nameValue = extensionHandler["name"];
-                                    if (nameValue != null && nameValue.Type != JTokenType.Null)
+                                    DscNodeExtensionHandlerAssociationProperty dscNodeExtensionHandlerAssociationPropertyInstance = new DscNodeExtensionHandlerAssociationProperty();
+                                    nodeInstance.ExtensionHandler.Add(dscNodeExtensionHandlerAssociationPropertyInstance);
+                                    
+                                    JToken nameValue2 = extensionHandlerValue["name"];
+                                    if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
                                     {
-                                        string nameInstance = ((string)nameValue);
-                                        extensionHandlerInstance.Name = nameInstance;
+                                        string nameInstance2 = ((string)nameValue2);
+                                        dscNodeExtensionHandlerAssociationPropertyInstance.Name = nameInstance2;
                                     }
-
-                                    JToken versionValue = extensionHandler["version"];
+                                    
+                                    JToken versionValue = extensionHandlerValue["version"];
                                     if (versionValue != null && versionValue.Type != JTokenType.Null)
                                     {
                                         string versionInstance = ((string)versionValue);
-                                        extensionHandlerInstance.Version = versionInstance;
+                                        dscNodeExtensionHandlerAssociationPropertyInstance.Version = versionInstance;
                                     }
-
-                                    extensionHandlerListInstance.Add(extensionHandlerInstance);
                                 }
                             }
                             
@@ -1420,11 +1399,11 @@ namespace Microsoft.Azure.Management.Automation
                                 nodeInstance.Id = idInstance;
                             }
                             
-                            JToken nameValue2 = responseDoc["name"];
-                            if (nameValue2 != null && nameValue2.Type != JTokenType.Null)
+                            JToken nameValue3 = responseDoc["name"];
+                            if (nameValue3 != null && nameValue3.Type != JTokenType.Null)
                             {
-                                string nameInstance2 = ((string)nameValue2);
-                                nodeInstance.Name = nameInstance2;
+                                string nameInstance3 = ((string)nameValue3);
+                                nodeInstance.Name = nameInstance3;
                             }
                             
                             JToken locationValue = responseDoc["location"];

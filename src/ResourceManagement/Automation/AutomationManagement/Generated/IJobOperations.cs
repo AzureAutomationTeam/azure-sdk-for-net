@@ -57,7 +57,7 @@ namespace Microsoft.Azure.Management.Automation
         Task<JobCreateResponse> CreateAsync(string resourceGroupName, string automationAccount, JobCreateParameters parameters, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Retrieve the job identified by job id.  (see
+        /// Retrieve the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -67,8 +67,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -76,10 +76,10 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job operation.
         /// </returns>
-        Task<JobGetResponse> GetAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<JobGetResponse> GetAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Retrieve the job output identified by job id.  (see
+        /// Retrieve the job output identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -89,8 +89,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -98,11 +98,11 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job output operation.
         /// </returns>
-        Task<JobGetOutputResponse> GetOutputAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<JobGetOutputResponse> GetOutputAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Retrieve the runbook content of the job identified by job id.  (see
-        /// http://aka.ms/azureautomationsdk/joboperations for more
+        /// Retrieve the runbook content of the job identified by job name.
+        /// (see http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
         /// <param name='resourceGroupName'>
@@ -111,8 +111,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -120,7 +120,7 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get runbook content of the job operation.
         /// </returns>
-        Task<JobGetRunbookContentResponse> GetRunbookContentAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<JobGetRunbookContentResponse> GetRunbookContentAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
         
         /// <summary>
         /// Retrieve a list of jobs.  (see
@@ -161,7 +161,7 @@ namespace Microsoft.Azure.Management.Automation
         Task<JobListResponse> ListNextAsync(string nextLink, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Resume the job identified by jobId.  (see
+        /// Resume the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -171,8 +171,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -181,10 +181,10 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        Task<AzureOperationResponse> ResumeAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<AzureOperationResponse> ResumeAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Stop the job identified by jobId.  (see
+        /// Stop the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -194,8 +194,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -204,10 +204,10 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        Task<AzureOperationResponse> StopAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<AzureOperationResponse> StopAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
         
         /// <summary>
-        /// Suspend the job identified by jobId.  (see
+        /// Suspend the job identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/joboperations for more
         /// information)
         /// </summary>
@@ -217,8 +217,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// The job id.
+        /// <param name='jobName'>
+        /// The job name.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
@@ -227,6 +227,6 @@ namespace Microsoft.Azure.Management.Automation
         /// A standard service response including an HTTP status code and
         /// request ID.
         /// </returns>
-        Task<AzureOperationResponse> SuspendAsync(string resourceGroupName, string automationAccount, Guid jobId, CancellationToken cancellationToken);
+        Task<AzureOperationResponse> SuspendAsync(string resourceGroupName, string automationAccount, string jobName, CancellationToken cancellationToken);
     }
 }

@@ -45,8 +45,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='jobStreamId'>
         /// Required. The job stream id.
@@ -54,11 +54,11 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job stream operation.
         /// </returns>
-        public static JobStreamGetResponse Get(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, Guid jobId, string jobStreamId)
+        public static JobStreamGetResponse Get(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, string jobName, string jobStreamId)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IJobStreamOperations)s).GetAsync(resourceGroupName, automationAccount, jobId, jobStreamId);
+                return ((IJobStreamOperations)s).GetAsync(resourceGroupName, automationAccount, jobName, jobStreamId);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
@@ -78,8 +78,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='jobStreamId'>
         /// Required. The job stream id.
@@ -87,9 +87,9 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the get job stream operation.
         /// </returns>
-        public static Task<JobStreamGetResponse> GetAsync(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, Guid jobId, string jobStreamId)
+        public static Task<JobStreamGetResponse> GetAsync(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, string jobName, string jobStreamId)
         {
-            return operations.GetAsync(resourceGroupName, automationAccount, jobId, jobStreamId, CancellationToken.None);
+            return operations.GetAsync(resourceGroupName, automationAccount, jobName, jobStreamId, CancellationToken.None);
         }
         
         /// <summary>
@@ -155,7 +155,7 @@ namespace Microsoft.Azure.Management.Automation
         }
         
         /// <summary>
-        /// Retrieve a list of jobs streams identified by job id.  (see
+        /// Retrieve a list of jobs streams identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/jobstreamoperations for more
         /// information)
         /// </summary>
@@ -169,8 +169,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job Id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='parameters'>
         /// Optional. The parameters supplied to the list job stream's stream
@@ -179,17 +179,17 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the list job stream operation.
         /// </returns>
-        public static JobStreamListResponse List(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, Guid jobId, JobStreamListParameters parameters)
+        public static JobStreamListResponse List(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, string jobName, JobStreamListParameters parameters)
         {
             return Task.Factory.StartNew((object s) => 
             {
-                return ((IJobStreamOperations)s).ListAsync(resourceGroupName, automationAccount, jobId, parameters);
+                return ((IJobStreamOperations)s).ListAsync(resourceGroupName, automationAccount, jobName, parameters);
             }
             , operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
         }
         
         /// <summary>
-        /// Retrieve a list of jobs streams identified by job id.  (see
+        /// Retrieve a list of jobs streams identified by job name.  (see
         /// http://aka.ms/azureautomationsdk/jobstreamoperations for more
         /// information)
         /// </summary>
@@ -203,8 +203,8 @@ namespace Microsoft.Azure.Management.Automation
         /// <param name='automationAccount'>
         /// Required. The automation account name.
         /// </param>
-        /// <param name='jobId'>
-        /// Required. The job Id.
+        /// <param name='jobName'>
+        /// Required. The job name.
         /// </param>
         /// <param name='parameters'>
         /// Optional. The parameters supplied to the list job stream's stream
@@ -213,9 +213,9 @@ namespace Microsoft.Azure.Management.Automation
         /// <returns>
         /// The response model for the list job stream operation.
         /// </returns>
-        public static Task<JobStreamListResponse> ListAsync(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, Guid jobId, JobStreamListParameters parameters)
+        public static Task<JobStreamListResponse> ListAsync(this IJobStreamOperations operations, string resourceGroupName, string automationAccount, string jobName, JobStreamListParameters parameters)
         {
-            return operations.ListAsync(resourceGroupName, automationAccount, jobId, parameters, CancellationToken.None);
+            return operations.ListAsync(resourceGroupName, automationAccount, jobName, parameters, CancellationToken.None);
         }
         
         /// <summary>
